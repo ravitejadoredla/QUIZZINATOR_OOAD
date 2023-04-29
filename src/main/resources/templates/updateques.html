@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<!-- Coding by CodingLab | www.codinglabweb.com-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<title> Registration or Sign Up form in HTML CSS | CodingLab </title>-->
+    <link rel="stylesheet" href="style1.css">
+   </head>
+<body>
+  <div class="wrapper">
+    <h2>Update Question</h2>
+    <form action="#" th:action="@{/process_update_ques}" method="post" th:object="${question}">
+		
+      <div class="input-box">
+        <input type="text" id="quest" name="quest" th:value="${question.quest}" placeholder="Quest" required>
+      </div>
+      <div class="input-box">
+        <input type="text" id="option1" name="option1" th:value="${question.option1}" placeholder="Option 1" required>
+      </div>
+      <div class="input-box">
+        <input type="text" id="option2" name="option2" th:value="${question.option2}" placeholder="Option 2" required>
+      </div>
+      <div class="input-box">
+        <input type="text" id="option3" name="option3" th:value="${question.option3}" placeholder="Option 3" required>
+      </div>
+      <div class="input-box">
+        <input type="text" id="option4" name="option4" th:value="${question.option3}" placeholder="Option 4" required>
+      </div>
+      <div class="input-box">
+        <input type="text" id="correctans" name="correctans" th:value="${question.correctans}" placeholder="Correct Answer" required>
+      </div>
+      <div class="input-box button">
+        <input type="Submit" value="Add Question">
+      </div>
+      
+    </form>
+  </div>
+</body>
+</html>

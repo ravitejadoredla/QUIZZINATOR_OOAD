@@ -1,0 +1,242 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<title> Registration or Sign Up form in HTML CSS | CodingLab </title>-->
+       
+       <style>
+		   #timer {
+  display: inline-block;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
+  background-color: #2196f3;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  
+}
+  
+  #timer span {
+    font-weight: bold;
+    color: #000;
+  }
+		   
+		   
+		   
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 10;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius:50px;
+  
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+body {
+  background-color: #f2f2f2;
+}
+
+form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+button[type="submit"] {
+  background-color: #2196f3;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button[type="submit"]:hover {
+  background-color: #0d8bf2;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+label.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  user-select: none;
+}
+
+/* Add a background color to the label when the checkbox is checked */
+label.container input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+.checkmark {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50px;
+}
+
+/* Style the checkmark */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+label.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+</style>
+<script>
+    window.onload = function(){
+        var distance = 60000; // 1 minute in milliseconds
+
+var x = setInterval(function() {
+  var minutes = Math.floor(distance / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the timer in the format MM:SS
+  document.getElementById("timer").innerHTML = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+if (distance <= 30000) {
+            document.getElementById("timer").style.backgroundColor = "red";
+        }
+  if (distance <= 0) {
+    clearInterval(x);
+    document.getElementById("myForm").submit();
+  } else {
+    distance -= 1000;
+  }
+}, 1000);
+    };
+</script>
+
+   </head>
+
+<body>
+<div id="timer"></div>
+
+
+<form id="myForm" action="#" th:action="@{/mcqs}" method="post" th:object="${listques}">
+	<center><h2 th:text="${quizid}" name="quizid" th:value="${quizid}"></h2></center>
+  <div th:each="ques: ${listques}">
+	  <input type="hidden" name="username" th:value="${username}"/>
+    
+	  		
+	  <!--<h4 th:text="${ques.quizid}" name="quizid" th:value="${ques.quizid}"></h4>	
+	  <h4 th:text="${ques.questionnum}"></h4>-->
+      <h3 th:text="${ques.quest}"></h3>
+      <input type="hidden" name="questionnum" th:value="${ques.questionnum}"/>
+      <input type="hidden" name="quizid" th:value="${ques.quizid}"/>
+      
+      
+      
+        <div>
+			<label class="container"><input type="checkbox"  name="option" th:value="${ques.option1}" th:text="${ques.option1}"/> <span class="checkmark" ></span></label>
+        <label class="container"><input type="checkbox"  name="option" th:value="${ques.option2}" th:text="${ques.option2}"/> <span class="checkmark" ></span></label>
+        <label class="container"><input type="checkbox"  name="option" th:value="${ques.option3}" th:text="${ques.option3}"/> <span class="checkmark"></span></label>
+        <label class="container"><input type="checkbox"  name="option" th:value="${ques.option4}" th:text="${ques.option4}"/> <span class="checkmark"></span></label></div>
+      
+  
+<!--<input type="radio" name="option" th:value="${option}" />
+        <span th:text="${option}"></span>-->
+
+  </li>
+  </div>
+  <button type="submit">Submit</button>
+</form>
+<!--<script>
+    function setSelectedOption() {
+        var selectedOption = document.querySelector('input[name="${ques.questionnum}"]:checked').value;
+        document.getElementById("selectedOption").value = selectedOption;
+    }
+</script>
+<input type="hidden" name="selectedOption" value="selectedOption"/>-->
+
+</body>
+</html>
+
+

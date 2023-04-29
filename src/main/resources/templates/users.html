@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+  <head>
+    <meta charset="ISO-8859-1">
+    <title>Professor's Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <style>
+		
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+		
+      }
+
+      .container {
+        width: 80%;
+        margin: auto;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      form {
+        display: inline-block;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+        border: 1px solid black;
+      }
+
+      th {
+        background-color: #ddd;
+      }
+
+      input[type="text"] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+        width: 100%;
+      }
+
+      button[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+	  p{
+		color: #3e8e41;
+	  }
+	  html {
+  height:100%;
+}
+
+body {
+  margin:0;
+}
+
+.bg {
+  animation:slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+  bottom:0;
+  left:-50%;
+  opacity:.5;
+  position:fixed;
+  right:-50%;
+  top:0;
+  z-index:-1;
+}
+
+.bg2 {
+  animation-direction:alternate-reverse;
+  animation-duration:4s;
+}
+
+.bg3 {
+  animation-duration:5s;
+}
+
+
+
+h1 {
+  font-family:monospace;
+}
+
+@keyframes slide {
+  0% {
+    transform:translateX(-25%);
+  }
+  100% {
+    transform:translateX(25%);
+  }
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+	  
+    </style>
+  </head>
+  <body>
+	  <div class="topnav">
+  <a class="active" href="#home">Home</a>
+  <a th:href="@{/}">Logout</a>
+  <a href="#contact">Contact</a>
+  <a href="#about">About</a>
+</div>
+	<center>
+		<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+
+  
+</div>
+    <div class="container text-center">        
+      <h1 style="color:whitesmoke;">DASHBOARD</h1>
+      <input type="hidden" name="profid" th:value="${profid}" />
+      <form th:action="@{/add}" method="get">
+        <div>
+          <h3><span th:text="${profid}"></span></h3>
+          <button type="submit">Add Question</button>
+        </div>
+      </form>
+    </div><p></p>
+    <h4>Dsiplay Score</h4>
+</center>
+<center>
+<div>
+	<p>
+		_________________________________________________
+	</p>
+</div>
+</center>
+<center>
+    <form th:action="@{/profscore}" method="get">
+      <input type="hidden" name="profid" th:value="${profid}" />
+      <button type="submit" name="quizid" value="i1">Quiz 1</button>
+      <button type="submit" name="quizid" value="i2">Quiz 2</button>
+      <button type="submit" name="quizid" value="i3">Quiz 3</button>
+      <button type="submit" name="quizid" value="i4">Quiz 4</button>
+    </form>
+</center>
+<center>
+<div>
+	<p>
+		_________________________________________________
+	</p>
+</div>
+</center>
+	<center>
+    <table style="width:40%">
+      <thead>
+        <tr>
+          <th>QuizID</th>
+          <th>Username</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="scoreb : ${scoreboard}">
+          <td th:text="${scoreb.quizid}"></td>
+          <td th:text="${scoreb.username}"></td>
+          <td th:text="${scoreb.score}"></td>
+        </tr>
+      </tbody>
+    </table><p></p>
+    <h4>Avg Score is : <span th:text="${avgscore}"></span></h4>
+    <h4>Max Score is : <span th:text="${maxscore}"></span></h4><p></p>
+
+	<form th:action="@{/deleteques}" method="post">
+		<input type="hidden" name="profid" th:value="${profid}" />
+		<input type="text" id="quizid" name="quizid" placeholder="Quiz ID" required>
+		<input type="text" id="questionnum" name="questionnum" placeholder="Question Num" required>
+		<button type="submit">Delete Question</button><p></p>
+	</form>
+</center>
+<center>
+	<div>
+		<h3>Display Question</h3><p></p>
+		<form th:action="@{/displayprofques}" method="get">
+				<input type="hidden" name="profid" th:value="${profid}" />
+		<button type="submit" name="quizid" value="i1">Quiz 1</button>
+		<button type="submit" name="quizid" value="i2">Quiz 2</button>
+		<button type="submit" name="quizid" value="i3">Quiz 3</button>
+		<button type="submit" name="quizid" value="i4">Quiz 4</button>
+		</form>
+		<center>
+<div>
+	<p>
+		_________________________________________________
+	</p>
+</div>
+</center>
+		<table style="width:40%">
+        <thead>
+            <tr>
+                <th>QuizID</th>
+                <th>Question Num</th>
+                <th>Question</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr  th:each="proques : ${profques}">
+                <td th:text="${proques.quizid}"></td>
+                <td th:text="${proques.questionnum}"></td>
+                <td th:text="${proques.quest}"></td>
+            </tr>
+        </tbody>
+	</div>
+</center>
+	</body>
+</html>
+	

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+        /* Reset default styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Set body styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        
+        /* Set heading styles */
+        h1 {
+            font-size: 36px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        /* Set button styles */
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        /* Change button color on hover */
+        button:hover {
+            background-color: #0062cc;
+        }
+    </style>
+</head>
+<body>
+	
+    <h1>Welcome <span th:text="${username}"></span></h1>
+    
+    <form th:action="@{/displayques}" method="get">
+		<input type="hidden" name="username" th:value="${username}"/>
+  		<button type="submit" name="quizid" value="i1">Quiz 1</button>
+  		<button type="submit" name="quizid" value="i2">Quiz 2</button>
+  		<button type="submit" name="quizid" value="quiz3">Quiz 3</button>
+	</form>
+	
+	<form th:action="@{/score}" method="get">
+		<input type="hidden" name="username" th:value="${username}"/>
+		<button type="submit" name="quizid" value="i1">Score 1</button>
+		<button type="submit" name="quizid" value="i2">Score 2</button>
+	</form>
+</body>
+</html>

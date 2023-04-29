@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+<head>
+    <title>Matching Records</title>
+</head>
+<body>
+    <h1>Your score for Quiz <span th:text="${quizid}"></span> is: <span th:text="${score}"></span></h1>
+    <table style="width:40%">
+        <thead>
+            <tr>
+                <th>QuizID</th>
+                <th>Username</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr  th:each="scoreb : ${scoreboard}">
+                <td th:text="${scoreb.quizid}"></td>
+                <td th:text="${scoreb.username}"></td>
+                <td th:text="${scoreb.score}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>Avg Score is : <span th:text="${avgscore}"></span></h3>
+    <h3>Max Score is : <span th:text="${maxscore}"></span></h3>
+</body>
+</html>
